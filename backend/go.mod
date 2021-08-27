@@ -1,9 +1,8 @@
-module github.com/backand
+module github.com/backend
 
 go 1.16
 
 require (
-	entgo.io/ent v0.9.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
@@ -20,4 +19,6 @@ require (
 	golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac // indirect
+	gorm.io/driver/mysql v1.1.2 // indirect
+	gorm.io/gorm v1.21.14 // indirect
 )

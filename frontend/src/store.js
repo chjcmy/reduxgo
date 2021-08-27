@@ -13,15 +13,14 @@ const sagaMiddleware = createSagaMiddlewaare();
 const initialState = {};
 
 const middlewares = [sagaMiddleware, routerMiddleware(history)];
-// eslint-disable-next-line no-underscore-dangle
-const devtools = window.__REDUX_DEVTOOLS_EXTENSTION_COMPOSE__;
+const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
 const composeEnhancer = process.env.NODE_ENV === 'production' ? compose : devtools || compose;
 
 const store = createStore(
   createRootReducer(history),
   initialState,
-  composeEnhancer(applyMiddleware(...middlewares)),
+  composeEnhancer(applyMiddleware(...middlewares))
 );
 sagaMiddleware.run(rootSaga);
 

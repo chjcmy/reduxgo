@@ -19,6 +19,10 @@ module.exports = {
   ],
   rules: {
     'comma-dangle': ['error', 'never'],
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }]
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-boolean-value': 0,
+    'no-use-before-define': 0,
+    'no-debugger': 0,
+    'import/prefer-default-export': 0
   }
 };
