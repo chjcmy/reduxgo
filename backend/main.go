@@ -29,7 +29,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	//e.GET("/hosting", api.Hosting)
+	e.GET("/hosting", api.Hosting)
 	//e.POST("/unittest", api.UnitCreate)
 	//e.GET("/unitshosting", api.UnitHosting)
 	//e.POST("/bookcreate", api.BookCreate)
@@ -40,6 +40,14 @@ func main() {
 	//e.PUT("/bookupdate/:id", api.BookUpdate)
 	//e.GET("/newbooks", api.NewBooks)
 	e.POST("/login", api.Login)
+	r := e.Group("/relogin")
+
+	// Configure middleware with the custom claims type
+	config := middleware.JWTConfig{
+		SigningKey: []byte("chltjdgus123!"),
+	}
+	r.Use(middleware.JWTWithConfig(config))
+	r.GET("", api.ReLogin)
 
 	e.Logger.Fatal(e.Start(":8000"))
 }
