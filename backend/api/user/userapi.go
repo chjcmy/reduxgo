@@ -1,4 +1,4 @@
-package api
+package user
 
 import (
 	"fmt"
@@ -13,11 +13,14 @@ import (
 
 var db = db2.Config()
 
+var user migrate.User
+
 var count int64
 
 type (
 	jwtCustomClaims struct {
-		Num string `json:"num"` //nolint:govet
+		Num string `json:"num"`
+		ID  int    `json:"id"`
 		jwt.StandardClaims
 	}
 	googleNum struct {
@@ -29,14 +32,15 @@ func Login(c echo.Context) error {
 	nums := &googleNum{}
 	c.Bind(nums)
 
-	db.Model(migrate.User{}).Where("google_num = ?", nums.Num).Count(&count)
+	db.Model(migrate.User{}).Where("google_num = ?", nums.Num).Find(&user)
 
-	if count == 0 {
+	if user.ID == 0 {
 		return c.JSON(http.StatusBadRequest, nil)
 	}
 
 	var claims = &jwtCustomClaims{
-		nums.Num,
+		user.GoogleNum,
+		int(user.ID),
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
 		},
@@ -58,12 +62,12 @@ func ReLogin(c echo.Context) error {
 
 	googles := c.Get("user").(*jwt.Token)
 	claims := googles.Claims.(jwt.MapClaims)
-	name := claims["num"].(string)
+	googling := claims["num"].(string)
 
-	db.Model(migrate.User{}).Where("google_num = ?", name).Count(&count)
+	db.Model(migrate.User{}).Where("google_num = ?", googling).Count(&count)
 
 	if count == 0 {
-		return c.JSON(http.StatusBadRequest, 0)
+		return c.JSON(http.StatusBadRequest, nil)
 	}
 
 	return c.JSON(http.StatusOK, echo.Map{

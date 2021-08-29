@@ -1,22 +1,23 @@
 package migration
 
 import (
-	"gorm.io/gorm"
 	"time"
 )
 
 type Book struct {
-	gorm.Model `json:"gorm_model"`
-	Title      string `json:"title,omitempty"`
-	Subject    string `json:"subject,omitempty"`
-	UserID     int    `json:"user_id"`
-	User       User   `json:"user"`
-	UnitID     int    `json:"unit_id"`
-	Unit       Unit   `json:"unit"`
+	ID        int    `gorm:"primary_key" json:"id,omitempty"`
+	Title     string `json:"title,omitempty"`
+	Subject   string `json:"subject,omitempty"`
+	UserID    int    `json:"user_id"`
+	User      User
+	UnitID    int `json:"unit_id"`
+	Unit      Unit
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type User struct {
-	ID        int
+	ID        int        `gorm:"primary_key"`
 	Name      string     `json:"name,omitempty"`
 	Email     string     `json:"email,omitempty"`
 	Age       *time.Time `json:"age"`
@@ -28,6 +29,6 @@ type User struct {
 }
 
 type Unit struct {
-	ID          int
+	ID          int    `gorm:"primary_key"`
 	ContentName string `json:"content_name,omitempty"`
 }
