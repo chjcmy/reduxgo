@@ -10,17 +10,6 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
-	"time"
-)
-
-type (
-	user struct {
-		Name string `json:"name"`
-	}
-
-	birth struct {
-		Birthdays time.Time `json:"birthdays"`
-	}
 )
 
 func main() {

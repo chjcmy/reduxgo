@@ -23,6 +23,8 @@ module.exports = {
     'react/jsx-boolean-value': 0,
     'no-use-before-define': 0,
     'no-debugger': 0,
-    'import/prefer-default-export': 0
+    'import/prefer-default-export': 0,
+    camelcase: 0,
+    'global-require': 0
   }
 };
