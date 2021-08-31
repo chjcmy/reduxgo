@@ -15,7 +15,7 @@ const PostWrite = () => {
 
   const [selector, setSelector] = useState([]);
 
-  const [form, setValue] = useState({ title: '', category: '', Subject: '' });
+  const [form, setValue] = useState({ title: '', category: 0, Subject: '' });
   // const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,10 +35,13 @@ const PostWrite = () => {
   };
 
   const getDataFromCKEditor = (event, editor) => {
-    console.log(editor);
+    const data = editor.getData();
+    console.log(data);
+    setValue({
+      ...form,
+      Subject: data
+    });
   };
-
-  console.log(selector);
 
   // const onSubmit = async (e) => {
   //   await e.prevenDefault();
@@ -57,11 +60,11 @@ const PostWrite = () => {
               className="form-control"
               onChange={onChange}
             />
-            <Label for="title">Category</Label>
+            <Label for="category">Category</Label>
             <Input
               type="select"
-              name="select"
-              id="title"
+              name="category"
+              id="category"
               className="form-control"
               onChange={onChange}
             >
