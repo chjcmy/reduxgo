@@ -6,7 +6,7 @@ const Header = () => (
     <Row>
       <Col md="6" sm="auto" className="text-center m-auto">
         <h1>Sung.Blog</h1>
-        <p>성현이의 기술 공장</p>
+        <p>성현이의 기술 공방</p>
       </Col>
     </Row>
   </div>
