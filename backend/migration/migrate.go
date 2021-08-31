@@ -5,15 +5,15 @@ import (
 )
 
 type Book struct {
-	ID        int    `gorm:"primary_key" json:"id,omitempty"`
-	Title     string `json:"title,omitempty"`
-	Subject   string `json:"subject,omitempty"`
-	UserID    int    `json:"user_id"`
-	User      User
-	UnitID    int `json:"unit_id"`
-	Unit      Unit
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID         int       `json:"id,omitempty"`
+	Title      string    `json:"title,omitempty"`
+	Subject    string    `json:"subject,omitempty"`
+	UserID     int       `json:"user_id,omitempty"`
+	User       User
+	CategoryID int       `json:"category_id,omitempty"`
+	Category   Category
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 type User struct {
@@ -28,7 +28,7 @@ type User struct {
 	Gitlab    string     `json:"gitlab,omitempty"`
 }
 
-type Unit struct {
-	ID          int    `gorm:"primary_key"`
-	ContentName string `json:"content_name,omitempty"`
+type Category struct {
+	ID           int    `gorm:"primary_key" json:"id,omitempty"`
+	CategoryName string `json:"categoryName,omitempty"`
 }

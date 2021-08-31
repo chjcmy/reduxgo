@@ -24,17 +24,18 @@ func BookCreate(c echo.Context) error {
 	claims := googles.Claims.(jwt.MapClaims)
 	id := claims["id"].(float64)
 
-	if err := c.Bind(B); err != nil {
-		return nil
+	if err := c.Bind(&B); err != nil {
+		fmt.Println(err)
+		return c.JSON(http.StatusOK, err)
 	}
 
-	fmt.Println(B)
+	fmt.Println(&B)
 
 	B.UserID = int(id)
 
-	fmt.Println(B)
+	fmt.Println(&B)
 
-	db.Select("title", "subject", "user_id", "unit_id").Create(B)
+	db.Select("title", "subject", "user_id", "category_id").Create(&B)
 
 	return c.JSON(http.StatusOK, nil)
 }
@@ -48,18 +49,18 @@ func BookRead(c echo.Context) error {
 	result := db.
 		Where("books.id = ?", id).
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
-			return tx.Select("ID, name")
+			return tx.Select("id, name")
 		}).
-		Preload("Unit", func(tx *gorm.DB) *gorm.DB {
-			return tx.Select("ID, content_name")
+		Preload("Category", func(tx *gorm.DB) *gorm.DB {
+			return tx.Select("id, category_name")
 		}).
 		Find(&B)
 
 	if result.Error != nil {
-		return c.JSON(http.StatusBadRequest, nil)
+		return c.JSON(http.StatusBadRequest, B)
 	}
 
-	return c.JSON(http.StatusOK, B)
+	return c.JSON(http.StatusOK, &B)
 }
 
 func BookShow(c echo.Context) error {
@@ -68,17 +69,17 @@ func BookShow(c echo.Context) error {
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("ID, name")
 		}).
-		Preload("Unit", func(tx *gorm.DB) *gorm.DB {
-			return tx.Select("ID, content_name")
+		Preload("Category", func(tx *gorm.DB) *gorm.DB {
+			return tx.Select("ID, category_name")
 		}).
-		Select("books.id, books.title, books.user_id, books.unit_id, books.created_at, updated_at").
+		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").
 		Find(&Bs)
 
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
 	}
 
-	return c.JSON(http.StatusOK, Bs)
+	return c.JSON(http.StatusOK, &Bs)
 }
 
 func BookUpdate(c echo.Context) error {
@@ -89,7 +90,7 @@ func BookUpdate(c echo.Context) error {
 		return nil
 	}
 
-	result := db.Model(&B).Where(id).Updates(B)
+	result := db.Model(&B).Where(id).Updates(&B)
 
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
@@ -120,15 +121,15 @@ func PickUnitBook(c echo.Context) error {
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("ID, name")
 		}).
-		Preload("Unit", func(tx *gorm.DB) *gorm.DB {
-			return tx.Select("ID, content_name")
+		Preload("Categories", func(tx *gorm.DB) *gorm.DB {
+			return tx.Select("ID, category_name")
 		}).
-		Select("books.id, books.title, books.user_id, books.unit_id, books.created_at, updated_at").
+		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").
 		Find(&Bs)
 
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
 	}
 
-	return c.JSON(http.StatusOK, Bs)
+	return c.JSON(http.StatusOK, &Bs)
 }

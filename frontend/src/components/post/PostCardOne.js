@@ -31,17 +31,17 @@ const PostCardOne = ({ posts }) => {
       {
       // eslint-disable-next-line react/prop-types
       Array.isArray(posts) ? posts.map(({
-        id, title, Unit, created_at, updated_at, unit_id
+        id, title, category_id, created_at, updated_at, Category
       }) => (
         <div key={id} className="col-md-4">
           <Link to={`/post/${id}`} className="text-dark text-decoration-none">
             <Card>
-              <CardImg top className={PicPick(unit_id)} />
+              <CardImg top className={PicPick(category_id)} />
               <CardBody>
                 <CardTitle className="text-truncate d-flex justify-content-between">
                   <span className="text-truncate">{title}</span>
                 </CardTitle>
-                <CardSubtitle tag="h6" className="mb-2 text-muted">{Unit.content_name}</CardSubtitle>
+                <CardSubtitle tag="h6" className="mb-2 text-muted">{Category.categoryName}</CardSubtitle>
                 <CardText>
                   make:
                   {' '}

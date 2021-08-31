@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/backend/api/Category"
 	"github.com/backend/api/book"
-	"github.com/backend/api/unit"
 	user2 "github.com/backend/api/user"
 	"github.com/backend/db"
 	"github.com/backend/migration"
@@ -24,10 +24,10 @@ func main() {
 	db3 := db.Config()
 
 	// Migrate the schema
-	db3.AutoMigrate(&migration.Book{}, &migration.Unit{}, &migration.User{})
+	db3.AutoMigrate(&migration.Book{}, &migration.Category{}, &migration.User{})
 
 	e.GET("/hosting", user2.Hosting)
-	e.GET("/unitshosting", unit.UnitHosting)
+	e.GET("/unitshosting", Category.CategoryHosting)
 	e.GET("/bookread/:id", book.BookRead)
 	e.GET("/bookshow", book.BookShow)
 	e.GET("/pickunitbooks/:id", book.PickUnitBook)

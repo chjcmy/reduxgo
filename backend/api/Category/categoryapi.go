@@ -1,4 +1,4 @@
-package unit
+package Category
 
 import (
 	db2 "github.com/backend/db"
@@ -9,14 +9,14 @@ import (
 
 var db = db2.Config()
 
-var units []migration.Unit
+var Categories []migration.Category
 
-func UnitHosting(c echo.Context) error {
-	result := db.Find(&units)
+func CategoryHosting(c echo.Context) error {
+	result := db.Find(&Categories)
 
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
 	}
 
-	return c.JSON(http.StatusOK, units)
+	return c.JSON(http.StatusOK, Categories)
 }
