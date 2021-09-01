@@ -30,7 +30,10 @@ type (
 
 func Login(c echo.Context) error {
 	nums := &googleNum{}
-	c.Bind(nums)
+	err := c.Bind(nums)
+	if err != nil {
+		return err
+	}
 
 	db.Model(migration.User{}).Where("google_num = ?", nums.Num).Find(&user)
 
