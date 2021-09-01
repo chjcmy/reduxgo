@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd4640b9-e006-4437-acfa-c3f0b4fc1ea2" name="Changes" comment="edit go module">
-      <change beforePath="$PROJECT_DIR$/api/book/bookapi.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/book/bookapi.go" afterDir="false" />
-    </list>
+    <list default="true" id="bd4640b9-e006-4437-acfa-c3f0b4fc1ea2" name="Changes" comment="edit bookapi" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,7 +87,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="edit go module" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit go module" />
+    <MESSAGE value="edit bookapi" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit bookapi" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
