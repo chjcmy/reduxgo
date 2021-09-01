@@ -60,7 +60,6 @@ function* watchLogout() {
 }
 
 const userLoadingAPI = (token) => {
-  console.log(`${token}`);
   const config = {
     headers: {
       'Content-Type': 'application/json',

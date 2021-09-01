@@ -1,9 +1,9 @@
 package book
 
 import (
+	db2 "backend/db"
+	"backend/migration"
 	"fmt"
-	db2 "github.com/chjcmy/reduxgo/backend/db"
-	"github.com/chjcmy/reduxgo/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	_ "go/ast"
@@ -35,7 +35,9 @@ func BookCreate(c echo.Context) error {
 
 	fmt.Println(&B)
 
-	db.Select("title", "subject", "user_id", "category_id").Create(&B)
+	result := db.Select("title", "subject", "user_id", "category_id").Create(&B)
+
+	fmt.Println(result)
 
 	return c.JSON(http.StatusOK, nil)
 }
@@ -51,7 +53,7 @@ func BookRead(c echo.Context) error {
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("id, name")
 		}).
-		Preload("Category", func(tx *gorm.DB) *gorm.DB {
+		Preload("category", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("id, category_name")
 		}).
 		Find(&B)
@@ -126,7 +128,6 @@ func PickUnitBook(c echo.Context) error {
 		}).
 		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").
 		Find(&Bs)
-
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
 	}

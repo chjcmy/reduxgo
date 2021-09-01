@@ -35,5 +35,6 @@ module.exports = {
     'no-shadow': 0,
     'consistent-return': 0,
     'import/order': 0,
+    'no-const-assign': 0
   }
 };

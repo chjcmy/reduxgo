@@ -1,12 +1,11 @@
 package main
 
 import (
-	"github.com/chjcmy/reduxgo/backend/api/Category"
-	"github.com/chjcmy/reduxgo/backend/api/book"
-	user2 "github.com/chjcmy/reduxgo/backend/api/user"
-	"github.com/chjcmy/reduxgo/backend/db"
-	"github.com/chjcmy/reduxgo/backend/migration"
-	_ "github.com/go-sql-driver/mysql"
+	"backend/api/book"
+	"backend/api/category"
+	"backend/api/user"
+	"backend/db"
+	"backend/migration"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
@@ -24,16 +23,19 @@ func main() {
 	db3 := db.Config()
 
 	// Migrate the schema
-	db3.AutoMigrate(&migration.Book{}, &migration.Category{}, &migration.User{})
+	err := db3.AutoMigrate(&migration.Book{}, &migration.Category{}, &migration.User{})
+	if err != nil {
+		return
+	}
 
-	e.GET("/hosting", user2.Hosting)
-	e.GET("/unitshosting", Category.CategoryHosting)
+	e.GET("/hosting", user.Hosting)
 	e.GET("/bookread/:id", book.BookRead)
 	e.GET("/bookshow", book.BookShow)
 	e.GET("/pickunitbooks/:id", book.PickUnitBook)
 	e.DELETE("/bookdelete/:id", book.BookDelete)
 	e.PUT("/bookupdate/:id", book.BookUpdate)
-	e.POST("/login", user2.Login)
+	e.POST("/login", user.Login)
+	e.GET("/unitshosting", category.CategoryHosting)
 	r := e.Group("/re")
 
 	// Configure middleware with the custom claims type
@@ -41,7 +43,7 @@ func main() {
 		SigningKey: []byte("chltjdgus123!"),
 	}
 	r.Use(middleware.JWTWithConfig(config))
-	r.GET("/login", user2.ReLogin)
+	r.GET("/login", user.ReLogin)
 	r.POST("/bookcreate", book.BookCreate)
 	e.Logger.Fatal(e.Start(":8000"))
 }

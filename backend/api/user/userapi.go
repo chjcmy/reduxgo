@@ -1,9 +1,9 @@
 package user
 
 import (
+	db2 "backend/db"
+	"backend/migration"
 	"fmt"
-	db2 "github.com/chjcmy/reduxgo/backend/db"
-	"github.com/chjcmy/reduxgo/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -30,7 +30,10 @@ type (
 
 func Login(c echo.Context) error {
 	nums := &googleNum{}
-	c.Bind(nums)
+	err := c.Bind(nums)
+	if err != nil {
+		return err
+	}
 
 	db.Model(migration.User{}).Where("google_num = ?", nums.Num).Find(&user)
 

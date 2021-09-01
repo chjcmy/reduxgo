@@ -40,3 +40,21 @@
 .life {
   background-image: url("./img/life.gif");
 }
+
+.ck {
+  .ck-editor{
+    min-width: 100%;
+  }
+}
+
+.ck-editor_editable{
+  max-font-size: 80rem;
+  min-height: 20rem;
+  min-width: 100%;
+}
+
+.ck-editor__editable_inline{
+  max-font-size: 80rem;
+  min-height: 20rem;
+  min-width: 100%;
+}

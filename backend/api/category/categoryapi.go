@@ -1,8 +1,8 @@
-package Category
+package category
 
 import (
-	db2 "github.com/chjcmy/reduxgo/backend/db"
-	"github.com/chjcmy/reduxgo/backend/migration"
+	db2 "backend/db"
+	"backend/migration"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )

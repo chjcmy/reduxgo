@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Col,
@@ -9,14 +9,15 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import { editorConfiguration } from '../../components/editor/EditorConfig';
 import axios from 'axios';
+import { POST_UPLOADING_REQUEST } from '../../redux/types';
 
 const PostWrite = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   const [selector, setSelector] = useState([]);
 
-  const [form, setValue] = useState({ title: '', category: '', Subject: '' });
-  // const dispatch = useDispatch();
+  const [form, setValue] = useState({ title: '', category_id: 0, subject: '' });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const config = async () => {
@@ -35,19 +36,31 @@ const PostWrite = () => {
   };
 
   const getDataFromCKEditor = (event, editor) => {
-    console.log(editor);
+    const data = editor.getData();
+    setValue({
+      ...form,
+      subject: data
+    });
   };
 
-  console.log(selector);
-
-  // const onSubmit = async (e) => {
-  //   await e.prevenDefault();
-  // const { title, contents, category}
-  // };
+  const onSubmit = async () => {
+    // eslint-disable-next-line prefer-const
+    let { title, category_id, subject } = form;
+    const token = localStorage.getItem('token');
+    category_id = Number(category_id);
+    debugger;
+    const body = {
+      title, category_id, subject, token
+    };
+    dispatch({
+      type: POST_UPLOADING_REQUEST,
+      payload: body
+    });
+  };
   return (
     <>
       {isAuthenticated ? (
-        <Form>
+        <Form onSubmit={onSubmit}>
           <FormGroup className="mb-3">
             <Label for="title">Title</Label>
             <Input
@@ -57,14 +70,17 @@ const PostWrite = () => {
               className="form-control"
               onChange={onChange}
             />
-            <Label for="title">Category</Label>
+            <Label for="category_id">Category</Label>
             <Input
               type="select"
-              name="select"
-              id="title"
+              name="category_id"
+              id="category_id"
               className="form-control"
               onChange={onChange}
             >
+              <option>
+                Nil
+              </option>
               {selector.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.categoryName}
