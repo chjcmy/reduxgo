@@ -1,4 +1,10 @@
-import { POST_LOADING_FAILURE, POST_LOADING_REQUEST, POST_LOADING_SUCCESS } from '../types';
+import {
+  POST_LOADING_FAILURE,
+  POST_LOADING_REQUEST,
+  POST_LOADING_SUCCESS, POST_UPLOADING_FAILURE,
+  POST_UPLOADING_REQUEST,
+  POST_UPLOADING_SUCCESS
+} from '../types';
 
 const initialState = {
   isAuthenticated: null,
@@ -29,6 +35,24 @@ export default function (state = initialState, action) {
         loading: false
       };
     case POST_LOADING_FAILURE:
+      return {
+        ...state,
+        loading: false
+      };
+    case POST_UPLOADING_REQUEST:
+      debugger;
+      return {
+        ...state,
+        posts: [],
+        loading: true
+      };
+    case POST_UPLOADING_SUCCESS:
+      return {
+        ...state,
+        posts: [...state.posts, ...action.payload],
+        loading: false
+      };
+    case POST_UPLOADING_FAILURE:
       return {
         ...state,
         loading: false
