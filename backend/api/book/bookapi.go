@@ -35,7 +35,9 @@ func BookCreate(c echo.Context) error {
 
 	fmt.Println(&B)
 
-	db.Select("title", "subject", "user_id", "category_id").Create(&B)
+	result := db.Select("title", "subject", "user_id", "category_id").Create(&B)
+
+	fmt.Println(result)
 
 	return c.JSON(http.StatusOK, nil)
 }
@@ -126,7 +128,6 @@ func PickUnitBook(c echo.Context) error {
 		}).
 		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").
 		Find(&Bs)
-
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
 	}
