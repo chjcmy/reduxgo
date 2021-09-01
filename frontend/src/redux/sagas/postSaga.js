@@ -10,7 +10,7 @@ const loadPostAPI = () => axios.get('/bookshow');
 function* loadPosts() {
   try {
     const result = yield call(loadPostAPI);
-    console.log(result, 'loadPosts');
+    console.log(result.data, 'loadPosts');
     yield put({
       type: POST_LOADING_SUCCESS,
       payload: result.data

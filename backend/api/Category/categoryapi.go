@@ -1,0 +1,22 @@
+package Category
+
+import (
+	db2 "github.com/chjcmy/reduxgo/backend/db"
+	"github.com/chjcmy/reduxgo/backend/migration"
+	"github.com/labstack/echo/v4"
+	"net/http"
+)
+
+var db = db2.Config()
+
+var Categories []migration.Category
+
+func CategoryHosting(c echo.Context) error {
+	result := db.Find(&Categories)
+
+	if result.Error != nil {
+		return c.JSON(http.StatusOK, result.Error)
+	}
+
+	return c.JSON(http.StatusOK, Categories)
+}

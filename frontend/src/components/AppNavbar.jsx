@@ -8,10 +8,8 @@ import LoginModal from './auth/LoginModal';
 import { LOGOUT_REQUEST } from '../redux/types';
 
 const AppNavbar = () => {
-  // eslint-disable-next-line no-unused-vars
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, user, userRole } = useSelector((state) => state.auth);
-  console.log(userRole, 'UserRole');
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -26,9 +24,9 @@ const AppNavbar = () => {
     setIsOpen(false);
   }, [user]);
 
-  // const handleToggle = () => {
-  //   setIsOpen(!isOpen);
-  // };
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   const addPostLink = () => {
 
@@ -64,9 +62,9 @@ const AppNavbar = () => {
     <>
       <Navbar color="dark" dark expand="lg" className="sticky-top">
         <Container>
-          <Link to="/" className="text-white text-decoration-none">안녕</Link>
+          <Link to="/" className="text-white text-decoration-none">Sung.Blog</Link>
         </Container>
-        <NavbarToggler />
+        <NavbarToggler onClick={handleToggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto d-flex justify-content-around" navbar>
             {isAuthenticated

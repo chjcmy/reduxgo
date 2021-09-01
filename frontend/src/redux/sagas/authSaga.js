@@ -60,14 +60,14 @@ function* watchLogout() {
 }
 
 const userLoadingAPI = (token) => {
-  console.log(token);
+  console.log(`${token}`);
   const config = {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     }
   };
-  return axios.get('/relogin', config);
+  return axios.get('/re/login', config);
 };
 
 function* userLoading(action) {

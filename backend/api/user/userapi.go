@@ -1,9 +1,9 @@
-package api
+package user
 
 import (
 	"fmt"
-	db2 "github.com/backend/db"
-	migrate "github.com/backend/migration"
+	db2 "github.com/chjcmy/reduxgo/backend/db"
+	"github.com/chjcmy/reduxgo/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -13,11 +13,14 @@ import (
 
 var db = db2.Config()
 
+var user migration.User
+
 var count int64
 
 type (
 	jwtCustomClaims struct {
-		Num string `json:"num"` //nolint:govet
+		Num string `json:"num"`
+		ID  int    `json:"id"`
 		jwt.StandardClaims
 	}
 	googleNum struct {
@@ -29,14 +32,15 @@ func Login(c echo.Context) error {
 	nums := &googleNum{}
 	c.Bind(nums)
 
-	db.Model(migrate.User{}).Where("google_num = ?", nums.Num).Count(&count)
+	db.Model(migration.User{}).Where("google_num = ?", nums.Num).Find(&user)
 
-	if count == 0 {
+	if user.ID == 0 {
 		return c.JSON(http.StatusBadRequest, nil)
 	}
 
 	var claims = &jwtCustomClaims{
-		nums.Num,
+		user.GoogleNum,
+		int(user.ID),
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
 		},
@@ -58,12 +62,12 @@ func ReLogin(c echo.Context) error {
 
 	googles := c.Get("user").(*jwt.Token)
 	claims := googles.Claims.(jwt.MapClaims)
-	name := claims["num"].(string)
+	googling := claims["num"].(string)
 
-	db.Model(migrate.User{}).Where("google_num = ?", name).Count(&count)
+	db.Model(&migration.User{}).Where("google_num = ?", googling).Count(&count)
 
 	if count == 0 {
-		return c.JSON(http.StatusBadRequest, 0)
+		return c.JSON(http.StatusBadRequest, nil)
 	}
 
 	return c.JSON(http.StatusOK, echo.Map{
@@ -84,7 +88,7 @@ func Hosting(c echo.Context) error {
 
 	hosts := &host{}
 
-	db.Model(&migrate.User{}).Limit(1).Find(&hosts)
+	db.Model(&migration.User{}).Limit(1).Find(&hosts)
 
 	hosts.Age = diff(hosts.Age, time.Now())
 
