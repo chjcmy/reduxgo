@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/backend/api/Category"
-	"github.com/backend/api/book"
-	user2 "github.com/backend/api/user"
-	"github.com/backend/db"
-	"github.com/backend/migration"
+	"github.com/chjcmy/reduxgo/backend/api/Category"
+	"github.com/chjcmy/reduxgo/backend/api/book"
+	user2 "github.com/chjcmy/reduxgo/backend/api/user"
+	"github.com/chjcmy/reduxgo/backend/db"
+	"github.com/chjcmy/reduxgo/backend/migration"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"

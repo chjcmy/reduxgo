@@ -2,8 +2,8 @@ package user
 
 import (
 	"fmt"
-	db2 "github.com/backend/db"
-	migrate "github.com/backend/migration"
+	db2 "github.com/chjcmy/reduxgo/backend/db"
+	"github.com/chjcmy/reduxgo/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -13,7 +13,7 @@ import (
 
 var db = db2.Config()
 
-var user migrate.User
+var user migration.User
 
 var count int64
 
@@ -32,7 +32,7 @@ func Login(c echo.Context) error {
 	nums := &googleNum{}
 	c.Bind(nums)
 
-	db.Model(migrate.User{}).Where("google_num = ?", nums.Num).Find(&user)
+	db.Model(migration.User{}).Where("google_num = ?", nums.Num).Find(&user)
 
 	if user.ID == 0 {
 		return c.JSON(http.StatusBadRequest, nil)
@@ -64,7 +64,7 @@ func ReLogin(c echo.Context) error {
 	claims := googles.Claims.(jwt.MapClaims)
 	googling := claims["num"].(string)
 
-	db.Model(migrate.User{}).Where("google_num = ?", googling).Count(&count)
+	db.Model(&migration.User{}).Where("google_num = ?", googling).Count(&count)
 
 	if count == 0 {
 		return c.JSON(http.StatusBadRequest, nil)
@@ -88,7 +88,7 @@ func Hosting(c echo.Context) error {
 
 	hosts := &host{}
 
-	db.Model(&migrate.User{}).Limit(1).Find(&hosts)
+	db.Model(&migration.User{}).Limit(1).Find(&hosts)
 
 	hosts.Age = diff(hosts.Age, time.Now())
 
