@@ -1,9 +1,9 @@
 package book
 
 import (
+	db2 "backend/db"
+	"backend/migration"
 	"fmt"
-	db2 "github.com/backend/db"
-	"github.com/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	_ "go/ast"
@@ -51,7 +51,7 @@ func BookRead(c echo.Context) error {
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("id, name")
 		}).
-		Preload("Category", func(tx *gorm.DB) *gorm.DB {
+		Preload("category", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("id, category_name")
 		}).
 		Find(&B)

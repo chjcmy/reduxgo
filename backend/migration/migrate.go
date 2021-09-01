@@ -5,12 +5,12 @@ import (
 )
 
 type Book struct {
-	ID         int       `json:"id,omitempty"`
-	Title      string    `json:"title,omitempty"`
-	Subject    string    `json:"subject,omitempty"`
-	UserID     int       `json:"user_id,omitempty"`
+	ID         int    `json:"id,omitempty"`
+	Title      string `json:"title,omitempty"`
+	Subject    string `json:"subject,omitempty"`
+	UserID     int    `json:"user_id,omitempty"`
 	User       User
-	CategoryID int       `json:"category_id,omitempty"`
+	CategoryID int `json:"category_id,omitempty"`
 	Category   Category
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`
