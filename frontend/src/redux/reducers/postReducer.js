@@ -1,4 +1,6 @@
 import {
+  POST_DETAIL_LOADING_FAILURE,
+  POST_DETAIL_LOADING_REQUEST, POST_DETAIL_LOADING_SUCCESS,
   POST_LOADING_FAILURE,
   POST_LOADING_REQUEST,
   POST_LOADING_SUCCESS, POST_UPLOADING_FAILURE,
@@ -16,6 +18,7 @@ const initialState = {
   creatorId: '',
   categoryFindResult: '',
   title: '',
+  subject: '',
   searchBy: '',
   searchResult: ''
 };
@@ -40,7 +43,6 @@ export default function (state = initialState, action) {
         loading: false
       };
     case POST_UPLOADING_REQUEST:
-      debugger;
       return {
         ...state,
         posts: [],
@@ -53,6 +55,26 @@ export default function (state = initialState, action) {
         loading: false
       };
     case POST_UPLOADING_FAILURE:
+      return {
+        ...state,
+        loading: false
+      };
+    case POST_DETAIL_LOADING_REQUEST:
+      return {
+        ...state,
+        posts: [],
+        loading: true
+      };
+    case POST_DETAIL_LOADING_SUCCESS:
+      return {
+        ...state,
+        creatorId: action.payload.User.name,
+        postDetail: action.payload,
+        title: action.payload.title,
+        subject: action.payload.subject,
+        loading: false
+      };
+    case POST_DETAIL_LOADING_FAILURE:
       return {
         ...state,
         loading: false

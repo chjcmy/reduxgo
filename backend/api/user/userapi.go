@@ -1,9 +1,9 @@
 package user
 
 import (
-	db2 "backend/db"
-	"backend/migration"
 	"fmt"
+	db2 "github.com/backend/db"
+	"github.com/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"net/http"

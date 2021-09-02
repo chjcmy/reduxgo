@@ -1,8 +1,8 @@
 package category
 
 import (
-	db2 "backend/db"
-	"backend/migration"
+	db2 "github.com/backend/db"
+	"github.com/backend/migration"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )

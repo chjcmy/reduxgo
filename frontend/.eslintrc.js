@@ -35,6 +35,11 @@ module.exports = {
     'no-shadow': 0,
     'consistent-return': 0,
     'import/order': 0,
-    'no-const-assign': 0
+    'no-const-assign': 0,
+    'react/destructuring-assignment': 0,
+    'no-unused-vars': 0,
+    'no-undef': 0,
+    'eact/jsx-no-undef': 0,
+    'react/prop-types': 0
   }
 };

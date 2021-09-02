@@ -15,4 +15,4 @@ COPY . .
 
 RUN go build
 
-CMD ["./backand"]
+CMD ["./backend"]
