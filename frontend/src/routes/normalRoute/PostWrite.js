@@ -48,7 +48,6 @@ const PostWrite = () => {
     let { title, category_id, subject } = form;
     const token = localStorage.getItem('token');
     category_id = Number(category_id);
-    debugger;
     const body = {
       title, category_id, subject, token
     };

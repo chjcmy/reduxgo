@@ -58,3 +58,16 @@
   min-height: 20rem;
   min-width: 100%;
 }
+
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+textarea {
+  resize: none;
+}
+
+.font-text-center {
+  text-align: center;
+}

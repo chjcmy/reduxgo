@@ -27,15 +27,10 @@ const {
   prepareUrls
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
-const semver = require('semver');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
 const createDevServerConfig = require('../config/webpackDevServer.config');
-const getClientEnvironment = require('../config/env');
 
-const react = require(require.resolve('react', { paths: [paths.appPath] }));
-
-const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
@@ -60,7 +55,7 @@ if (process.env.HOST) {
     'If this was unintentional, check that you haven\'t mistakenly set it in your shell.'
   );
   console.log(
-    `Learn more here: ${chalk.yellow('https://cra.link/advanced-config')}`
+    `Learn more here: ${chalk.yellow('https://bit.ly/CRA-advanced-config')}`
   );
   console.log();
 }
@@ -71,9 +66,8 @@ const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 
 checkBrowsers(paths.appPath, isInteractive)
   .then(() =>
-    // We attempt to use the default port but if it is busy, we offer the user to
-    // run on a different port. `choosePort()` Promise resolves to the next free port.
-  // eslint-disable-next-line implicit-arrow-linebreak
+  // We attempt to use the default port but if it is busy, we offer the user to
+  // run on a different port. `choosePort()` Promise resolves to the next free port.
     choosePort(HOST, DEFAULT_PORT))
   .then((port) => {
     if (port == null) {
@@ -84,7 +78,6 @@ checkBrowsers(paths.appPath, isInteractive)
     const config = configFactory('development');
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
-
     const useTypeScript = fs.existsSync(paths.appTsConfig);
     const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
     const urls = prepareUrls(
@@ -130,12 +123,16 @@ checkBrowsers(paths.appPath, isInteractive)
         clearConsole();
       }
 
-      if (env.raw.FAST_REFRESH && semver.lt(react.version, '16.10.0')) {
+      // We used to support resolving modules according to `NODE_PATH`.
+      // This now has been deprecated in favor of jsconfig/tsconfig.json
+      // This lets you use absolute paths in imports inside large monorepos:
+      if (process.env.NODE_PATH) {
         console.log(
           chalk.yellow(
-            `Fast Refresh requires React 16.10 or higher. You are using React ${react.version}.`
+            'Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app.'
           )
         );
+        console.log();
       }
 
       console.log(chalk.cyan('Starting the development server...\n'));
@@ -149,12 +146,13 @@ checkBrowsers(paths.appPath, isInteractive)
       });
     });
 
-    if (process.env.CI !== 'true') {
+    if (isInteractive || process.env.CI !== 'true') {
       // Gracefully exit when stdin ends
       process.stdin.on('end', () => {
         devServer.close();
         process.exit();
       });
+      process.stdin.resume();
     }
   })
   .catch((err) => {

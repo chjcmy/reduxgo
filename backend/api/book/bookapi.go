@@ -1,9 +1,9 @@
 package book
 
 import (
-	db2 "backend/db"
-	"backend/migration"
 	"fmt"
+	db2 "github.com/backend/db"
+	"github.com/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	_ "go/ast"
@@ -14,11 +14,11 @@ import (
 
 var db = db2.Config()
 
-var B migration.Book
-
-var Bs []migration.Book
+var Bs = new([]migration.Book)
 
 func BookCreate(c echo.Context) error {
+
+	var B = new(migration.Book)
 
 	googles := c.Get("user").(*jwt.Token)
 	claims := googles.Claims.(jwt.MapClaims)
@@ -44,6 +44,8 @@ func BookCreate(c echo.Context) error {
 
 func BookRead(c echo.Context) error {
 
+	var B = new(migration.Book)
+
 	id, _ := strconv.Atoi(c.Param("id"))
 
 	fmt.Println(id)
@@ -53,13 +55,13 @@ func BookRead(c echo.Context) error {
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("id, name")
 		}).
-		Preload("category", func(tx *gorm.DB) *gorm.DB {
+		Preload("Category", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("id, category_name")
 		}).
-		Find(&B)
+		First(&B)
 
 	if result.Error != nil {
-		return c.JSON(http.StatusBadRequest, B)
+		return c.JSON(http.StatusBadRequest, &B)
 	}
 
 	return c.JSON(http.StatusOK, &B)
@@ -86,6 +88,8 @@ func BookShow(c echo.Context) error {
 
 func BookUpdate(c echo.Context) error {
 
+	var B = new(migration.Book)
+
 	id, _ := strconv.Atoi(c.Param("id"))
 
 	if err := c.Bind(B); err != nil {
@@ -102,6 +106,8 @@ func BookUpdate(c echo.Context) error {
 }
 
 func BookDelete(c echo.Context) error {
+
+	var B = new(migration.Book)
 
 	id, _ := strconv.Atoi(c.Param("id"))
 

@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="223d0a3d-3f76-480e-bc03-fab7d71230ee" name="Changes" comment="Merge remote-tracking branch 'origin/main' into main">
-      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-09-02__6_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-09-02__6_01__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/book/bookapi.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/book/bookapi.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/category/categoryapi.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/category/categoryapi.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/user/userapi.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/userapi.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/sagas/postSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/sagas/postSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/routes/normalRoute/PostDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/routes/normalRoute/PostDetail.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +54,7 @@
     <property name="go.formatter.settings.were.checked" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />

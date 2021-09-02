@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Container } from 'reactstrap';
 import { Switch, Route } from 'react-router-dom';
 import Header from '../components/header';
@@ -18,7 +18,7 @@ const MyRouter = () => (
       <Switch>
         <Route path="/" exact component={PostCardList} />
         <Route path="/posts" component={PostWrite} />
-        <Route path="/posts/:id" component={PostDetail} />
+        <Route path="/post/:id" component={PostDetail} />
         <Route path="/posts/category/:categoryName" component={CategoryResult} />
         <Route path="/search/:searchTerm" component={Search} />
         <Route path="*" to="/" />

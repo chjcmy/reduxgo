@@ -4,6 +4,7 @@ import {
   Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle, Row
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import dateFormat from 'dateformat';
 
 const PicPick = (contentPic) => {
   switch (contentPic) {
@@ -23,13 +24,9 @@ const PicPick = (contentPic) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const PostCardOne = ({ posts }) => {
-  console.log(posts);
-
-  return (
-    <>
-      {
-      // eslint-disable-next-line react/prop-types
+const PostCardOne = ({ posts }) => (
+  <>
+    {
       Array.isArray(posts) ? posts.map(({
         id, title, category_id, created_at, updated_at, Category
       }) => (
@@ -39,21 +36,21 @@ const PostCardOne = ({ posts }) => {
               <CardImg top className={PicPick(category_id)} />
               <CardBody>
                 <CardTitle className="text-truncate d-flex justify-content-between">
-                  <span className="text-truncate">{title}</span>
+                  <span className="text-truncate fw-bold">{title}</span>
                 </CardTitle>
-                <CardSubtitle tag="h6" className="mb-2 text-muted">{Category.categoryName}</CardSubtitle>
-                <CardText>
+                <CardSubtitle tag="h6" className="mb-2 text-muted ">{Category.categoryName}</CardSubtitle>
+                <CardText className="fs-6 fw-light lh-1">
                   make:
                   {' '}
-                  {created_at}
+                  {dateFormat(created_at, 'fullDate')}
                 </CardText>
-                <CardText>
+                <CardText className="fs-6 fw-light lh-1">
                   update:
                   {' '}
-                  {updated_at}
+                  {dateFormat(updated_at, 'fullDate')}
                 </CardText>
                 <Row>
-                  <Button color="primary" className="p-2 btn-block">
+                  <Button color="primary" className="p-2">
                     More
                   </Button>
                 </Row>
@@ -63,8 +60,7 @@ const PostCardOne = ({ posts }) => {
         </div>
       )) : null
     }
-    </>
-  );
-};
+  </>
+);
 
 export default PostCardOne;
