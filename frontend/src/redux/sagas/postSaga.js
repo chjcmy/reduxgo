@@ -4,6 +4,8 @@ import {
 } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
+  POST_DELETE_FAILURE,
+  POST_DELETE_REQUEST, POST_DELETE_SUCCESS,
   POST_DETAIL_LOADING_FAILURE,
   POST_DETAIL_LOADING_REQUEST, POST_DETAIL_LOADING_SUCCESS,
   POST_LOADING_FAILURE,
@@ -76,9 +78,7 @@ const loadPostDetailAPI = (payload) => axios.get(`/bookread/${payload}`);
 
 function* loadPostDetail(action) {
   try {
-    debugger;
     const result = yield call(loadPostDetailAPI, action.payload);
-    console.log(result, 'post_detail_saga_data');
     yield put({
       type: POST_DETAIL_LOADING_SUCCESS,
       payload: result.data
@@ -97,10 +97,34 @@ function* watchloadPostDetail() {
   yield takeEvery(POST_DETAIL_LOADING_REQUEST, loadPostDetail);
 }
 
+const loadPostDeleteAPI = (payload) => axios.delete(`/bookdelete/${payload}`);
+
+function* loadPostDelete(action) {
+  try {
+    const result = yield call(loadPostDeleteAPI, action.payload);
+    yield put({
+      type: POST_DELETE_SUCCESS,
+      payload: result.data
+    });
+    yield put(push('/'));
+  } catch (e) {
+    yield put({
+      type: POST_DELETE_FAILURE,
+      payload: e
+    });
+  }
+}
+
+function* watchloadPostDelete() {
+  yield takeEvery(POST_DELETE_REQUEST, loadPostDelete);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadPosts),
     fork(watchupLoadPosts),
-    fork(watchloadPostDetail)
+    fork(watchloadPostDetail),
+    fork(watchloadPostDelete)
+
   ]);
 }

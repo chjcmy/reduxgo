@@ -10,6 +10,7 @@ import { BorderSpinner } from '../../components/spinner/Spinner';
 import dateFormat from 'dateformat';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import BalloonEditor from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
+import { editorConfiguration } from '../../components/editor/EditorConfig';
 
 const PostDetail = (req) => {
   const dispatch = useDispatch();
@@ -20,7 +21,6 @@ const PostDetail = (req) => {
 
   const { isAuthenticated } = useSelector((state) => state.auth);
 
-  console.log(postDetail);
   const id = Number(req.match.params.id);
   useEffect(() => {
     dispatch({
@@ -36,9 +36,7 @@ const PostDetail = (req) => {
   const onDeleteClick = () => {
     dispatch({
       type: POST_DELETE_REQUEST,
-      payload: {
-        id
-      }
+      payload: id
     });
   };
 
@@ -116,6 +114,7 @@ const PostDetail = (req) => {
           <CKEditor
             editor={BalloonEditor}
             data={postDetail.subject}
+            config={editorConfiguration}
             disabled="true"
           />
         </>
