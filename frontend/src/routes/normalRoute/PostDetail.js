@@ -16,7 +16,7 @@ const PostDetail = (req) => {
   const dispatch = useDispatch();
 
   const {
-    postDetail, creatorId, title, loading, subject
+    postDetail, title, loading
   } = useSelector((state) => state.post);
 
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -50,7 +50,7 @@ const PostDetail = (req) => {
         </Col>
         <Col className="col-md-3 mr-md-3 d-grid gap-2">
           <Link
-            to={`/post/${req.match.params.id}/edit`}
+            to={`/postedit/${req.match.params.id}`}
             className="btn btn-success "
           >
             Edit Post

@@ -5,9 +5,14 @@ import {
 import { push } from 'connected-react-router';
 import {
   POST_DELETE_FAILURE,
-  POST_DELETE_REQUEST, POST_DELETE_SUCCESS,
+  POST_DELETE_REQUEST,
+  POST_DELETE_SUCCESS,
   POST_DETAIL_LOADING_FAILURE,
-  POST_DETAIL_LOADING_REQUEST, POST_DETAIL_LOADING_SUCCESS,
+  POST_DETAIL_LOADING_REQUEST,
+  POST_DETAIL_LOADING_SUCCESS,
+  POST_EDIT_UPLOADING_FAILURE,
+  POST_EDIT_UPLOADING_REQUEST,
+  POST_EDIT_UPLOADING_SUCCESS,
   POST_LOADING_FAILURE,
   POST_LOADING_REQUEST,
   POST_LOADING_SUCCESS,
@@ -21,7 +26,6 @@ const loadPostAPI = () => axios.get('/bookshow');
 function* loadPosts() {
   try {
     const result = yield call(loadPostAPI);
-    console.log(result.data, 'loadPosts');
     yield put({
       type: POST_LOADING_SUCCESS,
       payload: result.data
@@ -52,9 +56,7 @@ const uploadPostAPI = (payload) => {
 
 function* uploadPosts(action) {
   try {
-    console.log(action, 'uploadPost');
     const result = yield call(uploadPostAPI, action.payload);
-    console.log(result.data, 'uploadPosts');
     console(result);
     yield put({
       type: POST_UPLOADING_SUCCESS,
@@ -119,12 +121,44 @@ function* watchloadPostDelete() {
   yield takeEvery(POST_DELETE_REQUEST, loadPostDelete);
 }
 
+const PostEditLoadAPI = (payload) => {
+  debugger;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  axios.put(`/bookupdate/${payload.id}`, payload, config);
+};
+
+function* PostEditLoad(action) {
+  try {
+    debugger;
+    const result = yield call(PostEditLoadAPI, action.payload);
+    console(result);
+    yield put({
+      type: POST_EDIT_UPLOADING_SUCCESS,
+      payload: result.data
+    });
+  } catch (e) {
+    yield put({
+      type: POST_EDIT_UPLOADING_FAILURE,
+      payload: e
+    });
+    yield put(push('/'));
+  }
+}
+
+function* watchPostEditLoad() {
+  yield takeEvery(POST_EDIT_UPLOADING_REQUEST, PostEditLoad);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadPosts),
     fork(watchupLoadPosts),
     fork(watchloadPostDetail),
-    fork(watchloadPostDelete)
-
+    fork(watchloadPostDelete),
+    fork(watchPostEditLoad)
   ]);
 }

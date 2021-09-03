@@ -1,9 +1,14 @@
 import {
   POST_DETAIL_LOADING_FAILURE,
-  POST_DETAIL_LOADING_REQUEST, POST_DETAIL_LOADING_SUCCESS,
+  POST_DETAIL_LOADING_REQUEST,
+  POST_DETAIL_LOADING_SUCCESS,
+  POST_EDIT_UPLOADING_FAILURE,
+  POST_EDIT_UPLOADING_REQUEST,
+  POST_EDIT_UPLOADING_SUCCESS,
   POST_LOADING_FAILURE,
   POST_LOADING_REQUEST,
-  POST_LOADING_SUCCESS, POST_UPLOADING_FAILURE,
+  POST_LOADING_SUCCESS,
+  POST_UPLOADING_FAILURE,
   POST_UPLOADING_REQUEST,
   POST_UPLOADING_SUCCESS
 } from '../types';
@@ -75,6 +80,26 @@ export default function (state = initialState, action) {
         loading: false
       };
     case POST_DETAIL_LOADING_FAILURE:
+      return {
+        ...state,
+        loading: false
+      };
+    case POST_EDIT_UPLOADING_REQUEST:
+      debugger;
+      return {
+        ...state,
+        loading: true
+      };
+    case POST_EDIT_UPLOADING_SUCCESS:
+      return {
+        ...state,
+        creatorId: action.payload.User.name,
+        postDetail: action.payload,
+        title: action.payload.title,
+        subject: action.payload.subject,
+        loading: false
+      };
+    case POST_EDIT_UPLOADING_FAILURE:
       return {
         ...state,
         loading: false
