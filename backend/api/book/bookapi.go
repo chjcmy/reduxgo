@@ -70,6 +70,7 @@ func BookRead(c echo.Context) error {
 func BookShow(c echo.Context) error {
 
 	result := db.
+		Order("updated_at desc").
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("ID, name")
 		}).
@@ -133,6 +134,7 @@ func PickUnitBook(c echo.Context) error {
 			return tx.Select("ID, category_name")
 		}).
 		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").
+		Order("updated_at desc").
 		Find(&Bs)
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
