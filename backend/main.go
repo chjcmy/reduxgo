@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/chjcmy/reduxgo/backend/api/book"
-	"github.com/chjcmy/reduxgo/backend/api/category"
-	"github.com/chjcmy/reduxgo/backend/api/user"
-	"github.com/chjcmy/reduxgo/backend/db"
-	"github.com/chjcmy/reduxgo/backend/migration"
+	"backend/api/book"
+	"backend/api/category"
+	"backend/api/user"
+	"backend/db"
+	"backend/migration"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
