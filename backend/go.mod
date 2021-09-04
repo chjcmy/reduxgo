@@ -1,4 +1,4 @@
-module github.com/backend
+module github.com/chjcmy/reduxgo
 
 go 1.17
 

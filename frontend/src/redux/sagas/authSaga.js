@@ -15,7 +15,6 @@ import {
 } from '../types';
 
 const loginUserAPI = (loginData) => {
-  console.log(loginData, 'loginData');
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -51,7 +50,6 @@ function* logout() {
     yield put({
       type: LOGOUT_FAILURE
     });
-    console.log(e);
   }
 }
 

@@ -1,4 +1,5 @@
 module.exports = {
+  parser: 'babel-eslint',
   env: {
     browser: true,
     es2021: true
@@ -39,7 +40,8 @@ module.exports = {
     'react/destructuring-assignment': 0,
     'no-unused-vars': 0,
     'no-undef': 0,
-    'eact/jsx-no-undef': 0,
-    'react/prop-types': 0
+    'react/jsx-no-undef': 0,
+    'react/prop-types': 0,
+    'react/jsx-props-no-spreading': 0
   }
 };

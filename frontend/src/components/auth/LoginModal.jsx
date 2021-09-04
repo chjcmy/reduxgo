@@ -14,13 +14,6 @@ const LoginModal = () => {
   });
   const dispatch = useDispatch();
   const { errorMsg } = useSelector((state) => state.auth);
-  useEffect(() => {
-    try {
-      setLocalMsg(errorMsg);
-    } catch (e) {
-      console.log(e);
-    }
-  }, [errorMsg]);
 
   const handleToggle = () => {
     dispatch({
@@ -30,16 +23,13 @@ const LoginModal = () => {
   };
 
   const responseGoogle = async (response) => {
-    console.log(response.googleId);
     setValues({ ...form, num: response.googleId });
     onSubmit();
   };
 
   const onSubmit = () => {
-    console.log(form);
     const { num } = form;
     const user = { num };
-    console.log(user);
     dispatch({
       type: LOGIN_REQUEST,
       payload: user
@@ -59,7 +49,6 @@ const LoginModal = () => {
             clientId="940522265963-gqbtd1jmbqtsueje1hhfqved273412i7.apps.googleusercontent.com"
             buttonText="Google"
             onSuccess={(result) => responseGoogle(result)}
-            onFailure={(result) => console.log(result)}
           />
         </ModalBody>
       </Modal>

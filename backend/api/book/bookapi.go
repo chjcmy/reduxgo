@@ -2,8 +2,8 @@ package book
 
 import (
 	"fmt"
-	db2 "github.com/backend/db"
-	"github.com/backend/migration"
+	db2 "github.com/chjcmy/reduxgo/backend/db"
+	"github.com/chjcmy/reduxgo/backend/migration"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	_ "go/ast"
