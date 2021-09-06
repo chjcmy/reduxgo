@@ -17,6 +17,8 @@ const PicPick = (contentPic) => {
     case 4:
       return 'server';
     case 5:
+      return 'CS';
+    case 6:
       return 'life';
     default:
       return null;
