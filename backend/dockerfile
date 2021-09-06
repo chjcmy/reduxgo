@@ -9,8 +9,6 @@ COPY go.mod ./
 
 COPY go.sum ./
 
-RUN git config --global url."https://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@github.com".insteadOf "https://github.com"
-
 RUN go mod download
 
 COPY . .
