@@ -2,23 +2,34 @@ import React from 'react';
 import { Col, Row } from 'reactstrap';
 
 import '../assets/custom.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faGitlab } from '@fortawesome/free-brands-svg-icons';
 
-const Footer = () => {
-  const thisYear = () => new Date().toDateString();
-
-  return (
-    <div id="main-footer" className="text-center m-auto">
-      <Row>
-        <Col>
-          <p>
-            today
-            {' '}
-            <span>{thisYear()}</span>
-          </p>
-        </Col>
-      </Row>
-    </div>
-  );
-};
+const Footer = () => (
+  <div id="main-footer" className="text-center m-auto">
+    <Row>
+      <Col>
+        <FontAwesomeIcon
+          icon={faGitlab}
+          size="lg"
+          onClick={() => {
+            const win = window.open('https://gitlab.com/chjcmy', '_blank');
+            win.focus();
+          }}
+          className="gitFont"
+        />
+        <FontAwesomeIcon
+          icon={faGithub}
+          size="lg"
+          onClick={() => {
+            const win = window.open('https://github.com/chjcmy', '_blank');
+            win.focus();
+          }}
+          className="gitFont"
+        />
+      </Col>
+    </Row>
+  </div>
+);
 
 export default Footer;
