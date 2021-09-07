@@ -70,7 +70,7 @@ func ReLogin(c echo.Context) error {
 	db.Model(&migration.User{}).Where("google_num = ?", googling).Count(&count)
 
 	if count == 0 {
-		return c.JSON(http.StatusBadRequest, nil)
+		return c.JSON(http.StatusOK, nil)
 	}
 
 	return c.JSON(http.StatusOK, echo.Map{
