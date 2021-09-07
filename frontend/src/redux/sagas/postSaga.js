@@ -4,6 +4,8 @@ import {
 } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
+  CATEGORY_FIND_FAILURE, CATEGORY_FIND_REQUEST,
+  CATEGORY_FIND_SUCCESS,
   POST_DELETE_FAILURE,
   POST_DELETE_REQUEST,
   POST_DELETE_SUCCESS,
@@ -122,7 +124,6 @@ function* watchloadPostDelete() {
 }
 
 const PostEditLoadAPI = (payload) => {
-  debugger;
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -133,7 +134,6 @@ const PostEditLoadAPI = (payload) => {
 
 function* PostEditLoad(action) {
   try {
-    debugger;
     const result = yield call(PostEditLoadAPI, action.payload);
     console(result);
     yield put({
@@ -153,12 +153,35 @@ function* watchPostEditLoad() {
   yield takeEvery(POST_EDIT_UPLOADING_REQUEST, PostEditLoad);
 }
 
+const CategoryFindAPI = (payload) => axios.get(`/pickunitbooks/${payload}`);
+
+function* CategoryFind(action) {
+  try {
+    const result = yield call(CategoryFindAPI, action.payload);
+    yield put({
+      type: CATEGORY_FIND_SUCCESS,
+      payload: result.data
+    });
+  } catch (e) {
+    yield put({
+      type: CATEGORY_FIND_FAILURE,
+      payload: e
+    });
+    yield put(push('/'));
+  }
+}
+
+function* watchCategoryFind() {
+  yield takeEvery(CATEGORY_FIND_REQUEST, CategoryFind);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadPosts),
     fork(watchupLoadPosts),
     fork(watchloadPostDetail),
     fork(watchloadPostDelete),
-    fork(watchPostEditLoad)
+    fork(watchPostEditLoad),
+    fork(watchCategoryFind)
   ]);
 }

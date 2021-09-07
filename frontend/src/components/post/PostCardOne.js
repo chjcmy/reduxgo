@@ -26,9 +26,12 @@ const PicPick = (contentPic) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const PostCardOne = ({ posts }) => (
-  <>
-    {
+const PostCardOne = ({ posts }) => {
+  console.log(posts);
+
+  return (
+    <>
+      {
       Array.isArray(posts) ? posts.map(({
         id, title, category_id, created_at, updated_at, Category
       }) => (
@@ -40,7 +43,9 @@ const PostCardOne = ({ posts }) => (
                 <CardTitle className="text-truncate d-flex justify-content-between">
                   <span className="text-truncate fw-bold">{title}</span>
                 </CardTitle>
-                <CardSubtitle tag="h6" className="mb-2 text-muted ">{Category.categoryName}</CardSubtitle>
+                {Category
+                  ? <CardSubtitle tag="h6" className="mb-2 text-muted ">{Category.categoryName}</CardSubtitle>
+                  : null}
                 <CardText className="fs-6 fw-light lh-1">
                   make:
                   {' '}
@@ -62,7 +67,9 @@ const PostCardOne = ({ posts }) => (
         </div>
       )) : null
     }
-  </>
-);
+    </>
+
+  );
+};
 
 export default PostCardOne;

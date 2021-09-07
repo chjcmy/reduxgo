@@ -83,3 +83,10 @@ textarea {
 .ck-editor__editable_inline {
   font-size: 1rem;
 }
+
+.my_category {
+
+  &:last-child {
+    margin-bottom: 0.25rem;
+  }
+}
