@@ -19,9 +19,9 @@ const MyRouter = () => (
     <Container id="main-body">
       <Switch>
         <Route path="/" exact component={PostCardList} />
-        <Route path="/posts" component={PostWrite} />
-        <Route path="/post/:id" component={PostDetail} />
-        <Route path="/posts/category/:categoryName" component={CategoryResult} />
+        <Route path="/posts" exact component={PostWrite} />
+        <Route path="/post/:id" exact component={PostDetail} />
+        <Route path="/post/category/:categoryName" exact component={CategoryResult} />
         <EditProtectedRoute path="/postedit/:id" exact component={PostEdit} />
         <Route path="/search/:searchTerm" component={Search} />
         <Route path="*" to="/" />

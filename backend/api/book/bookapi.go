@@ -69,6 +69,13 @@ func BookRead(c echo.Context) error {
 
 func BookShow(c echo.Context) error {
 
+	type name struct {
+		CategoryFindResult []migration.Category
+		PostFindResult     []migration.Book
+	}
+
+	var results = name{}
+
 	result := db.
 		Order("updated_at desc").
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
@@ -78,13 +85,19 @@ func BookShow(c echo.Context) error {
 			return tx.Select("ID, category_name")
 		}).
 		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").
-		Find(&Bs)
+		Find(&results.PostFindResult)
+
+	result2 := db.Find(&results.CategoryFindResult)
 
 	if result.Error != nil {
 		return c.JSON(http.StatusOK, result.Error)
 	}
 
-	return c.JSON(http.StatusOK, &Bs)
+	if result2.Error != nil {
+		return c.JSON(http.StatusOK, result.Error)
+	}
+
+	return c.JSON(http.StatusOK, &results)
 }
 
 func BookUpdate(c echo.Context) error {
@@ -121,16 +134,16 @@ func BookDelete(c echo.Context) error {
 	return c.JSON(http.StatusOK, result.Error)
 }
 
-func PickUnitBook(c echo.Context) error {
+func PickCategoryBook(c echo.Context) error {
 
 	id, _ := strconv.Atoi(c.Param("id"))
 
 	result := db.
-		Where("books.unit_id = ?", id).
+		Where("books.category_id = ?", id).
 		Preload("User", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("ID, name")
 		}).
-		Preload("Categories", func(tx *gorm.DB) *gorm.DB {
+		Preload("Category", func(tx *gorm.DB) *gorm.DB {
 			return tx.Select("ID, category_name")
 		}).
 		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").

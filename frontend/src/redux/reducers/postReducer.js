@@ -1,4 +1,6 @@
 import {
+  CATEGORY_FIND_FAILURE,
+  CATEGORY_FIND_REQUEST, CATEGORY_FIND_SUCCESS,
   POST_DETAIL_LOADING_FAILURE,
   POST_DETAIL_LOADING_REQUEST,
   POST_DETAIL_LOADING_SUCCESS,
@@ -21,6 +23,7 @@ const initialState = {
   loading: false,
   error: '',
   creatorId: '',
+  PostFindResult: '',
   categoryFindResult: '',
   title: '',
   subject: '',
@@ -39,7 +42,8 @@ export default function (state = initialState, action) {
     case POST_LOADING_SUCCESS:
       return {
         ...state,
-        posts: [...state.posts, ...action.payload],
+        posts: [...state.posts, ...action.payload.PostFindResult],
+        categoryFindResult: action.payload.CategoryFindResult,
         loading: false
       };
     case POST_LOADING_FAILURE:
@@ -85,7 +89,6 @@ export default function (state = initialState, action) {
         loading: false
       };
     case POST_EDIT_UPLOADING_REQUEST:
-      debugger;
       return {
         ...state,
         loading: true
@@ -102,6 +105,24 @@ export default function (state = initialState, action) {
     case POST_EDIT_UPLOADING_FAILURE:
       return {
         ...state,
+        loading: false
+      };
+    case CATEGORY_FIND_REQUEST:
+      return {
+        ...state,
+        posts: [],
+        loading: true
+      };
+    case CATEGORY_FIND_SUCCESS:
+      return {
+        ...state,
+        categoryFindResult: action.payload,
+        loading: false
+      };
+    case CATEGORY_FIND_FAILURE:
+      return {
+        ...state,
+        categoryFindResult: action.payload,
         loading: false
       };
     default:

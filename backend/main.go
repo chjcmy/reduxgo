@@ -31,7 +31,7 @@ func main() {
 	e.GET("/hosting", user.Hosting)
 	e.GET("/bookread/:id", book.BookRead)
 	e.GET("/bookshow", book.BookShow)
-	e.GET("/pickunitbooks/:id", book.PickUnitBook)
+	e.GET("/pickunitbooks/:id", book.PickCategoryBook)
 	e.DELETE("/bookdelete/:id", book.BookDelete)
 	e.PUT("/bookupdate/:id", book.BookUpdate)
 	e.POST("/login", user.Login)
