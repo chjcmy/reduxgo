@@ -36,6 +36,7 @@ func main() {
 	e.PUT("/bookupdate/:id", book.BookUpdate)
 	e.POST("/login", user.Login)
 	e.GET("/unitshosting", category.CategoryHosting)
+	e.GET("/search/:id", book.BookSearch)
 	r := e.Group("/re")
 
 	// Configure middleware with the custom claims type

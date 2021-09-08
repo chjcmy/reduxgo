@@ -155,3 +155,25 @@ func PickCategoryBook(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, &Bs)
 }
+
+func BookSearch(c echo.Context) error {
+
+	id := c.Param("id")
+
+	result := db.
+		Where("books.title LIKE ?", "%" + id + "%").
+		Preload("User", func(tx *gorm.DB) *gorm.DB {
+			return tx.Select("ID, name")
+		}).
+		Preload("Category", func(tx *gorm.DB) *gorm.DB {
+			return tx.Select("ID, category_name")
+		}).
+		Select("books.id, books.title, books.user_id, books.category_id, books.created_at, updated_at").
+		Order("updated_at desc").
+		Find(&Bs)
+	if result.Error != nil {
+		return c.JSON(http.StatusOK, result.Error)
+	}
+
+	return c.JSON(http.StatusOK, &Bs)
+}

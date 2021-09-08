@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import { Button, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const Category = ({ posts }) => (
-  <div className="d-flex">
+  <Row xs="3" className="d-flex">
     {Array.isArray(posts)
       ? posts.map(({ id, categoryName }) => (
-        <div key={id} className="d-flex mx-1 mt-1 my_category">
+        <Col sm={{ size: 'auto', offset: 1 }}>
           <Link
             to={{ pathname: `/post/category/${categoryName}`, state: { id } }}
             className="badge text-decoration-none"
@@ -17,10 +17,9 @@ const Category = ({ posts }) => (
               </Button>
             </span>
           </Link>
-        </div>
+        </Col>
       )) : ''}
-  </div>
-
+  </Row>
 );
 
 export default Category;

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginModal from './auth/LoginModal';
 import { LOGOUT_REQUEST } from '../redux/types';
+import SearchInput from './search/searchinput';
 
 const AppNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +38,7 @@ const AppNavbar = () => {
       <NavItem>
         {
         isAuthenticated ? (
-          <Form className="col mt-2">
+          <Form className="col mt-1">
             <Link to="/posts" className="btn btn-success block text-white px-3" onClick={addPostLink}>
               Add Post
             </Link>
@@ -49,7 +50,7 @@ const AppNavbar = () => {
       <NavItem>
         <Form className="col">
           <Link onClick={onLogout} to="/#">
-            <Button outline color="light" className="mt-2" block>
+            <Button outline color="light" className="mt-1" block>
               Logout
             </Button>
           </Link>
@@ -61,17 +62,18 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar color="dark" dark expand="lg" className="sticky-top">
-        <Container>
+        <Container className="gap-4">
           <Link to="/" className="text-white text-decoration-none">Sung.Blog</Link>
+          <NavbarToggler onClick={handleToggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <SearchInput isOpen={isOpen} />
+            <Nav className="ml-auto d-flex justify-content-around align-self-end" navbar>
+              {isAuthenticated
+                ? authLink
+                : <LoginModal />}
+            </Nav>
+          </Collapse>
         </Container>
-        <NavbarToggler onClick={handleToggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto d-flex justify-content-around" navbar>
-            {isAuthenticated
-              ? authLink
-              : <LoginModal />}
-          </Nav>
-        </Collapse>
       </Navbar>
     </>
   );
