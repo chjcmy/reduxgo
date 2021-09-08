@@ -13,6 +13,7 @@ import {
   USER_LOADING_REQUEST,
   USER_LOADING_SUCCESS
 } from '../types';
+import { push } from 'connected-react-router';
 
 const loginUserAPI = (loginData) => {
   const config = {
@@ -46,6 +47,7 @@ function* logout() {
     yield put({
       type: LOGOUT_SUCCESS
     });
+    yield put(push('/'));
   } catch (e) {
     yield put({
       type: LOGOUT_FAILURE

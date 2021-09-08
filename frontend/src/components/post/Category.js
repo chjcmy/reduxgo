@@ -6,7 +6,7 @@ const Category = ({ posts }) => (
   <Row xs="3" className="d-flex">
     {Array.isArray(posts)
       ? posts.map(({ id, categoryName }) => (
-        <Col sm={{ size: 'auto', offset: 1 }}>
+        <Col key={id} sm={{ size: 'auto', offset: 1 }}>
           <Link
             to={{ pathname: `/post/category/${categoryName}`, state: { id } }}
             className="badge text-decoration-none"

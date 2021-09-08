@@ -179,9 +179,7 @@ const SeachResultAPI = (payload) => axios.get(`/search/${encodeURIComponent(payl
 
 function* SeachResult(action) {
   try {
-    debugger;
     const result = yield call(SeachResultAPI, action.payload);
-    debugger;
     yield put({
       type: SEARCH_SUCCESS,
       payload: result.data
