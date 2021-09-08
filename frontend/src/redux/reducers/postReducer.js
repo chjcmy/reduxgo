@@ -31,7 +31,6 @@ const initialState = {
   searchResult: ''
 };
 
-// eslint-disable-next-line func-names
 export default function (state = initialState, action) {
   switch (action.type) {
     case POST_LOADING_REQUEST:
