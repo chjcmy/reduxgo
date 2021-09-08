@@ -9,7 +9,6 @@ const CategoryResult = ({ location }) => {
   const dispatch = useDispatch();
   const { categoryName } = useParams();
   const { categoryFindResult } = useSelector((state) => state.post);
-  console.log(categoryName);
 
   const catgoryNum = location.state.id;
 
@@ -20,7 +19,6 @@ const CategoryResult = ({ location }) => {
     });
   }, [dispatch, catgoryNum]);
 
-  console.log(categoryFindResult);
   return (
     <div>
       <h1>

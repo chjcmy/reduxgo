@@ -12,7 +12,7 @@ import {
   POST_LOADING_SUCCESS,
   POST_UPLOADING_FAILURE,
   POST_UPLOADING_REQUEST,
-  POST_UPLOADING_SUCCESS
+  POST_UPLOADING_SUCCESS, SEARCH_FAILURE, SEARCH_REQUEST, SEARCH_SUCCESS
 } from '../types';
 
 const initialState = {
@@ -31,6 +31,7 @@ const initialState = {
   searchResult: ''
 };
 
+// eslint-disable-next-line func-names
 export default function (state = initialState, action) {
   switch (action.type) {
     case POST_LOADING_REQUEST:
@@ -123,6 +124,26 @@ export default function (state = initialState, action) {
       return {
         ...state,
         categoryFindResult: action.payload,
+        loading: false
+      };
+    case SEARCH_REQUEST:
+      return {
+        ...state,
+        posts: [],
+        searchBy: action.payload,
+        loading: true
+      };
+    case SEARCH_SUCCESS:
+      return {
+        ...state,
+        searchBy: state.searchBy,
+        searchResult: action.payload,
+        loading: false
+      };
+    case SEARCH_FAILURE:
+      return {
+        ...state,
+        searchResult: action.payload,
         loading: false
       };
     default:

@@ -20,7 +20,7 @@ import {
   POST_LOADING_SUCCESS,
   POST_UPLOADING_FAILURE,
   POST_UPLOADING_REQUEST,
-  POST_UPLOADING_SUCCESS
+  POST_UPLOADING_SUCCESS, SEARCH_FAILURE, SEARCH_REQUEST, SEARCH_SUCCESS
 } from '../types';
 
 const loadPostAPI = () => axios.get('/bookshow');
@@ -175,6 +175,31 @@ function* watchCategoryFind() {
   yield takeEvery(CATEGORY_FIND_REQUEST, CategoryFind);
 }
 
+const SeachResultAPI = (payload) => axios.get(`/search/${encodeURIComponent(payload)}`);
+
+function* SeachResult(action) {
+  try {
+    debugger;
+    const result = yield call(SeachResultAPI, action.payload);
+    debugger;
+    yield put({
+      type: SEARCH_SUCCESS,
+      payload: result.data
+    });
+    yield put(push(`/search/${encodeURIComponent(action.payload)}`));
+  } catch (e) {
+    yield put({
+      type: SEARCH_FAILURE,
+      payload: e
+    });
+    yield put(push('/'));
+  }
+}
+
+function* watchSeachResult() {
+  yield takeEvery(SEARCH_REQUEST, SeachResult);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadPosts),
@@ -182,6 +207,7 @@ export default function* postSaga() {
     fork(watchloadPostDetail),
     fork(watchloadPostDelete),
     fork(watchPostEditLoad),
-    fork(watchCategoryFind)
+    fork(watchCategoryFind),
+    fork(watchSeachResult)
   ]);
 }

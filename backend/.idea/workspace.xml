@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4f266fb-505d-4bf1-aa99-c5a8cb0594aa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/post/Category.js" afterDir="false" />
+    <list default="true" id="b4f266fb-505d-4bf1-aa99-c5a8cb0594aa" name="Changes" comment="edit book api">
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/search/searchinput.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/book/bookapi.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/book/bookapi.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/user/userapi.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/user/userapi.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/routes/normalRoute/PostCardList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/routes/normalRoute/PostCardList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/AppNavbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/AppNavbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/post/PostCardOne.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/post/PostCardOne.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/reducers/postReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/reducers/postReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/sagas/postSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/sagas/postSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/routes/normalRoute/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/routes/normalRoute/Search.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,20 +60,21 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="backend" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build backend" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
       <package value="backend" />
       <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="backend" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -106,19 +112,14 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="edit book api" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit book api" />
+  </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/api/book/bookapi.go</url>
-          <line>153</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="GoApplicationRunConfiguration">
         <watch expression="Bs" language="go" />
