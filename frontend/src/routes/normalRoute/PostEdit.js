@@ -62,7 +62,7 @@ const PostEdit = (req) => {
               className="form-control"
               onChange={onChange}
             />
-            <Label for="Subject">Subject</Label>
+            <Label className="edit-margin-top" for="Subject">Subject</Label>
             <CKEditor
               editor={ClassicEditor}
               config={editorConfiguration}

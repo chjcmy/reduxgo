@@ -92,5 +92,9 @@ textarea {
 }
 
 .ck-editor__editable:not(.ck-editor__nested-editable) {
-  max-height: 60rem;
+  max-height: 64rem;
+}
+
+.edit-margin-top {
+  margin-top: 2rem;
 }
