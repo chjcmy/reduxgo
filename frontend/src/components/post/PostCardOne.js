@@ -20,6 +20,8 @@ const PicPick = (contentPic) => {
       return 'CS';
     case 6:
       return 'life';
+    case 7:
+      return 'java';
     default:
       return null;
   }
